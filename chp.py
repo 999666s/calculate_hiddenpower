@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import asyncio
-import unittest
 from re import findall
 from sys import argv
 
@@ -30,8 +29,7 @@ def hp_from_stats(a, b, c, d, e, f):
 
 
 def get_stats_from_gen(gen: str) -> list[str]:
-    stats = findall(r'\d+', gen)[0:6]
-    return stats
+    return findall(r'\d+', gen)[0:6]
 
 
 async def calculate_hiddenpower(gen: str):
@@ -43,17 +41,6 @@ async def calculate_hiddenpower(gen: str):
     return hp
 
 
-class HpTests(unittest.TestCase):
-    def test_chp(self):
-        self.assertEqual(asyncio.run(calculate_hiddenpower("h35a35d35s35sa35sd35.100")), "Steel")
-
-    def test_get_stats_from_gen(self):
-        self.assertEqual(
-                get_stats_from_gen("h35a35d35s35sa35sd35.100"),
-                ['35', '35', '35', '35', '35','35']
-        )
-
-
 async def main():
     gens = argv[1:]
     tasks = [calculate_hiddenpower(gen) for gen in gens]
@@ -63,7 +50,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    if argv[1] == "test":
-        unittest.main(argv=['first-arg-is-ignored'], exit=False)
-    else:
-        asyncio.run(main())
+    asyncio.run(main())
