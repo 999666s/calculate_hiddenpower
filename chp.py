@@ -4,9 +4,6 @@ from re import findall
 from sys import argv
 
 
-
-
-
 def hp_from_stats(a, b, c, d, e, f):
     return int(((a + 2*b + 4*c + 8*d + 16*e + 32*f)*15)/63)
 
