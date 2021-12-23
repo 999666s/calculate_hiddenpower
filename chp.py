@@ -4,7 +4,7 @@ from re import findall
 from sys import argv
 
 
-def hp_from_stats(a, b, c, d, e, f):
+def hidden_power_from_stats(a, b, c, d, e, f):
     return int(((a + 2*b + 4*c + 8*d + 16*e + 32*f)*15)/63)
 
 
@@ -33,18 +33,18 @@ async def calculate_hiddenpower(gen: str):
     }
     try:
         stats = map(lambda stat: int(stat % 2), map(int, get_stats_from_gen(gen)))
-        hp = types[hp_from_stats(*stats)]
+        hidden_power = types[hidden_power_from_stats(*stats)]
     except:
-        hp = "Error"
-    return hp
+        hidden_power = "Error"
+    return hidden_power
 
 
 async def main():
     gens = argv[1:]
     tasks = [calculate_hiddenpower(gen) for gen in gens]
     results = await asyncio.gather(*tasks)
-    for gen, hp in zip(gens, results):
-        print(f"{gen}\t{hp}")
+    for gen, hidden_power in zip(gens, results):
+        print(f"\t{gen}\t{hidden_power}")
 
 
 if __name__ == "__main__":
