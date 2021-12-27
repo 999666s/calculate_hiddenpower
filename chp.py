@@ -44,7 +44,7 @@ async def main():
     tasks = [calculate_hiddenpower(gen) for gen in gens]
     results = await asyncio.gather(*tasks)
     for gen, hidden_power in zip(gens, results):
-        print(f"\t{gen}\t{hidden_power}")
+        print(f"   {gen:>} {hidden_power:>8}")
 
 
 if __name__ == "__main__":
